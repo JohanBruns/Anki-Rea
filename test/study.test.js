@@ -146,3 +146,25 @@ test('without "Weiterlernen" a finished deck stays finished', async () => {
   const again = await nextCard(db, deckId, { ahead: true });
   assert.equal(again.card.id, r.card.id, 'a single-card deck shows its card again');
 });
+
+test('"Weiterlernen": a forgotten card comes back after its step, not right away', async () => {
+  const { db, deckId } = await setup(4, { newPerDay: 4 });
+  const now = Date.now();
+  let r = await nextCard(db, deckId, { now });
+  let t = now;
+  while (!r.done) r = await answer(db, r.card.id, 4, 1000, (t += 1000));
+
+  t += 60 * MIN;
+  r = await nextCard(db, deckId, { ahead: true, now: t });
+  const forgotten = r.card.id;
+  r = await answer(db, forgotten, 1, 1000, (t += 1000), { ahead: true }); // "Nochmal" → relearning, again in 10 min
+  assert.notEqual(r.card.id, forgotten, 'the session moves on to another card');
+  const second = r.card.id;
+  r = await answer(db, second, 2, 1000, (t += 1000), { ahead: true }); // "Schwer" → again in 15 min
+  assert.ok(![forgotten, second].includes(r.card.id), 'both failed cards wait for their step');
+
+  // Once its step has passed, the forgotten card is shown again.
+  t += 11 * MIN;
+  r = await answer(db, r.card.id, 3, 1000, t, { ahead: true });
+  assert.equal(r.card.id, forgotten);
+});

@@ -166,9 +166,11 @@ export async function nextCard(db, deckId, { exclude = 0, cardId = 0, ahead = fa
   }
   // In deadline mode reviews are also scheduled to the hour, so they may be pulled forward like learning cards.
   const aheadStates = w.deadline ? "('learning','relearning','review')" : "('learning','relearning')";
+  // "Weiterlernen": other cards come before pulling a just-failed card forward, so a card answered
+  // with "Nochmal"/"Schwer" waits for its learning step instead of being shown again right away.
+  if (!row && ahead) row = await pickAhead(db, deck, w, exclude);
   if (!row) row = await one(`c.state IN ${aheadStates} AND c.due <= ? AND c.id != ?`, 'c.due', learnAhead, exclude);
   if (!row) row = await one(`c.state IN ${aheadStates} AND c.due <= ?`, 'c.due', learnAhead);
-  if (!row && ahead) row = await pickAhead(db, deck, w, exclude);
 
   if (!row) {
     const extra = await db.get(
