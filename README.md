@@ -40,6 +40,8 @@ Online läuft Anki Rea auf Vercel mit einer Postgres-Datenbank (Neon) und ist pe
 
    Anki Rea startet dann im Vollbild wie eine App und bleibt angemeldet.
 
+**Updates:** Das Vercel-Projekt ist mit dem GitHub-Repository verbunden – jeder Push auf `main` wird automatisch veröffentlicht.
+
 Lokal (`npm start`) läuft weiter mit der SQLite-Datei – oder mit der Online-Datenbank, wenn `DATABASE_URL` gesetzt ist.
 
 ## Im Heim-WLAN (ohne Online-Hosting)
