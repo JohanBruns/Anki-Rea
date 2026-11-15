@@ -1,0 +1,25 @@
+{
+  "name": "anki-rea",
+  "version": "1.0.0",
+  "description": "Schlanker Anki-Nachbau als Web-App: Karteikarten mit Spaced Repetition, nutzbar am PC und auf dem Handy.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node --test \"test/**/*.test.js\"",
+    "import-anki": "node scripts/importLocalAnki.js",
+    "icons": "node scripts/makeIcons.js",
+    "test:pg": "node scripts/testPostgres.js",
+    "push-cloud": "node --env-file=.env.local scripts/pushToCloud.js"
+  },
+  "dependencies": {
+    "pg": "8.23.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.13",
+    "@electric-sql/pglite-socket": "0.2.16"
+  }
+}

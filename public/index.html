@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#4f5bd5" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Anki Rea" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Anki Rea</title>
+  </head>
+  <body>
+    <div class="app">
+      <nav class="nav" id="nav" aria-label="Hauptnavigation">
+        <a class="brand" href="#/">
+          <img src="/icons/icon.svg" alt="" width="32" height="32" />
+          <span>Anki Rea</span>
+        </a>
+        <a class="nav-link" href="#/" data-route="home"><span data-icon="decks"></span><span>Stapel</span></a>
+        <a class="nav-link" href="#/browse" data-route="browse"><span data-icon="cards"></span><span>Karten</span></a>
+        <a class="nav-link" href="#/import" data-route="import"><span data-icon="upload"></span><span>Import</span></a>
+        <a class="nav-link" href="#/stats" data-route="stats"><span data-icon="chart"></span><span>Statistik</span></a>
+      </nav>
+      <main class="view" id="view" tabindex="-1"></main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

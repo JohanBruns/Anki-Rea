@@ -1,0 +1,32 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "anki-rea",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server/index.js"],
+      "port": 8420
+    },
+    {
+      "name": "anki-rea-demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server/index.js"],
+      "port": 8434,
+      "env": {
+        "PORT": "8434",
+        "ANKI_REA_DB": "data/demo.db"
+      }
+    },
+    {
+      "name": "anki-rea-login-test",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server/index.js"],
+      "port": 8433,
+      "env": {
+        "PORT": "8433",
+        "ANKI_REA_PASSWORD": "test-passwort",
+        "ANKI_REA_DB": "data/login-test.db"
+      }
+    }
+  ]
+}

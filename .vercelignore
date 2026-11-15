@@ -1,0 +1,10 @@
+# Never upload local data, secrets or dev-only files to Vercel.
+data/
+.env*
+.claude/
+test/
+scripts/
+node_modules/
+*.db
+*.db-*
+start.bat

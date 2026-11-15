@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "",
+  "outputDirectory": "public",
+  "regions": ["fra1"],
+  "functions": {
+    "api/handler.js": { "maxDuration": 30 }
+  },
+  "rewrites": [{ "source": "/api/:path*", "destination": "/api/handler?path=:path*" }],
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+    }
+  ]
+}
